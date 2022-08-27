@@ -6,29 +6,33 @@ public class sales_by_match {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		List<Integer> ar = List.of(1, 2, 1, 2, 1, 3, 2);
+		//List<Integer> ar = List.of(1, 2, 1, 2, 1, 3, 2);
+		//List<Integer> ar = List.of(1, 1, 3, 1, 2, 1, 3, 3, 3, 3);
+		List<Integer> ar = List.of(10, 20, 20, 10, 10, 30, 50, 10, 20);
 		System.out.println(".." + sockMerchant(7, ar));
 	}
 	
 	 public static int sockMerchant(int n, List<Integer> ar) {
 		    // Write your code here
 		 int ans = 0;
-		 List<Integer> list = new ArrayList<Integer>();
-		 
-		 list.add(ar.get(0));
-		 
-		 for(int x : ar)
-			 for(int y : list)
-				 if(y == x) {
-					 ++ans;
-					 list.remove(list.indexOf(y));
+		 ArrayList<Integer> pair = new ArrayList<Integer>(ar);
+
+		 for (int i = 0 ; i < pair.size() ; ++i) {
+			 System.out.println("i: " + i + " - " + pair.get(i));
+			 System.out.println(pair.size());
+			 for (int j = i+1 ; j < pair.size() ; ++j) {
+				 System.out.println("j: " + j);
+				 if (pair.get(i) == pair.get(j)) {
+					 //only arraylists can be used to remove elements
+					 pair.remove(j);
+					 pair.remove(i);
+					 ans++;
+					 --i;
 					 break;
-				 } else 
-					 if (list.indexOf(y) == list.size()-1) 
-						 list.add(x);
-		 
-		 for(int y : list)
-			 System.out.println(y);
+					 //System.out.println(pair.size());
+				 }
+			 }
+		 }
 		 
 		 return ans;
     }
